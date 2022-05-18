@@ -1,9 +1,7 @@
 # SLR(1)
 
 import copy
-import sys
 
-#sys.setrecursionlimit(2000)
 # perform grammar augmentation
 def grammarAugmentation(rules, nonterm_userdef, start_symbol):
     # newRules stores processed output rules
