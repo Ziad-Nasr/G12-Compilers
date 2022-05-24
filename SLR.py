@@ -1,7 +1,10 @@
 # SLR(1)
 
 import copy
+import sys
 
+
+#sys.setrecursionlimit(2000)
 # perform grammar augmentation
 def grammarAugmentation(rules, nonterm_userdef, start_symbol):
     # newRules stores processed output rules
@@ -291,8 +294,8 @@ def follow(nt):
                         # - and take follow of LHS
                         # only if (NT in LHS)!=curNT
                         if nt != curNT:
+                            break
                             res = follow(curNT)
-
                     # add follow result in set form
                     if res is not None:
                         if type(res) is list:
