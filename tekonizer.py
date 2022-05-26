@@ -2,28 +2,31 @@ import ply.lex as lex
 
 # List of token names.   This is always required
 tokens = (
-    'ID',
-    'ASSIGN',
-    'NUMBER',
-    'SEMICOLON',
+    'id',
+    'assign',
+    'number',
+    'semicolon',
     'LESSTHAN',
     'EQUAL',
     'GREATERTHAN'
     'PROHIBITED',
+    'PROHIBITED2',
 )
-
-t_ASSIGN = r'\:\='
-t_SEMICOLON = r'\;'
+t_number = r'[0-9]+'
+t_PROHIBITED2 = r'[0-9]+[a-zA-Z_]+'
+t_assign = r'\:\='
+t_semicolon = r'\;'
 t_LESSTHAN = r'\<'
 t_EQUAL = r'\='
 t_GREATERTHAN = r'\>'
 t_PROHIBITED = r'[\!\@\$\%\^\&\*\(\)\,\.\'\"\{\}]'
+# t_PROHIBITED2 = r'[\d+[a-zA-Z_][a-zA-Z_0-9]*]'
 reserved = {
-    'repeat': 'REPEAT',
-    'Until': 'UNTIL'
+    'repeat': 'repeat',
+    'until': 'until'
 }
 
-tokens = ['ID', 'ASSIGN', 'NUMBER', 'SEMICOLON', 'LESSTHAN', 'EQUAL', 'GREATERTHAN', 'PROHIBITED' ] + list(reserved.values())
+tokens = ['id', 'assign', 'number', 'semicolon', 'LESSTHAN', 'EQUAL', 'GREATERTHAN', 'PROHIBITED','PROHIBITED2' ] + list(reserved.values())
 
 def t_COMMENT(t):
     r'\#.*'
@@ -41,7 +44,7 @@ def t_newline(t):
 
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
-    t.type = reserved.get(t.value, 'ID')
+    t.type = reserved.get(t.value, 'id')
     return t
 
 
@@ -49,11 +52,6 @@ def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
 
-
-def t_NUMBER(t):
-    r'\d+'
-    t.value = int(t.value)
-    return t
 
 
 # data = input("Sentence: ")
@@ -74,4 +72,5 @@ def tok(data):
         print(tok)
         counter +=1
     return list_tok , list_tok_DFA
+#new change
 
